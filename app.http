@@ -1,0 +1,103 @@
+GET http://localhost:3001
+
+###
+// afficher la liste des pizzas 
+
+GET http://localhost:3001/Pizza
+
+###
+// afficher une pizza avec son id
+
+GET http://localhost:3001/Pizza/66150402e4a664bc4c9a9360
+
+
+###
+
+//ajouter une pizza
+POST http://localhost:3001/Pizza
+Content-Type: application/json
+
+{
+    "name": "Calzone",
+    "base": "Tomate",
+    "price": 4,
+    "ingredients": ["Sauce Tomate", "Mozzarella", "Jambon", "Champignons", "Œuf"],
+    "description": "Une pizza pliée en forme de chausson garnie de sauce tomate, de mozzarella, de jambon, de champignons et d'œuf.",
+    "rating": 6,
+    "available": true,
+    "size": ["Moyenne", "Grande"],
+    "allergens": ["Gluten", "Produits Laitiers", "Œuf"]
+}
+
+###
+
+//modifier une pizza avec son id 
+PUT http://localhost:3001/Pizza/66150c79375dc34fe2367284
+Content-Type: application/json
+
+{
+    "name": "nordique",
+    "base": "Tomate",
+    "price": 10.99,
+    "ingredients": ["Sauce Tomate", "Mozzarella", "Saumon", "Crevettes", "Aneth"],
+    "description": "Une pizza garnie de sauce tomate, de mozzarella, de saumon, de crevettes et d'aneth.",
+    "rating": 4.5,
+    "available": true,
+    "size": ["Moyenne", "Grande"],
+    "allergens": ["Gluten", "Produits Laitiers", "Poisson", "Crustacés"]
+}
+
+###
+
+//supprimer une pizza avec son id
+DELETE http://localhost:3001/Pizza/66150c79375dc34fe2367284
+
+//_________________________________________________________________________________________________________________________
+### 
+
+// Se connecter avec un compte existant
+POST http://localhost:3001/auth/signin
+Content-Type: application/json
+
+{
+    "email": "mehdi.terrane@gmail.com",
+    "password": "Mzzzz?21"
+}
+
+###
+
+// Créer un compte
+POST http://localhost:3001/auth/signup
+Content-Type: application/json
+
+{
+    "email": "sam.enerve@gmail.com",
+    "password": "Testtest?21",
+    "name": "sam",
+    "phoneNumber": "0606060606"
+}
+
+###
+//_____________________________________________________________________________________________________________________________
+// Commander une pizza
+POST http://localhost:3001/commande 
+Content-Type: application/json
+
+{
+    "client": "sam.enerve@gmail.com",
+    "pizzas": "66163eec09aaa15198ec60d3",
+    "taille": "Grande",
+    "quantite": 1,
+    "status": "En cours"
+}
+
+###
+// Voir les commandes
+GET http://localhost:3001/commande
+
+###
+//_____________________________________________________________________________________________________________________________
+//pouvoir upload une image, dans ce cas elle vas etre stocker dans le dossier images a la racine du projet module_API
+POST http://localhost:3001/uploads/image
+Content-Type: multipart/form-data
+image: (binary)
